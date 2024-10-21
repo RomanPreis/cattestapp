@@ -1,4 +1,4 @@
 abstract final class AppUrls {
-  static const search = "https://api.thecatapi.com/v1/images/search";
-  static const image = "https://api.thecatapi.com/v1/images/";
+  static const String search = "https://api.thecatapi.com/v1/images/search";
+  static const String image = "https://api.thecatapi.com/v1/images/";
 }

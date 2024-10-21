@@ -14,9 +14,9 @@ class DashboardTab extends StatelessWidget {
     return Center(
       child: BlocBuilder<HomeBloc, HomeState>(
         bloc: bloc,
-        builder: (final context, final state) {
+        builder: (final BuildContext context, final HomeState state) {
           return Column(
-            children: [
+            children: <Widget>[
               const Text("Summary"),
               Text(
                 "${state.imageModels.length} pictures of cats downloaded",

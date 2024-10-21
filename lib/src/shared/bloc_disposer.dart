@@ -13,9 +13,9 @@ typedef Builder<T extends Bloc<dynamic, dynamic>> = Widget Function(
 /// but without spreading it to the subtree
 class BlocDisposer<T extends Bloc<dynamic, dynamic>> extends StatefulWidget {
   const BlocDisposer({
-    super.key,
     required this.create,
     required this.builder,
+    super.key,
   });
 
   final BlocCreator<T> create;
@@ -36,8 +36,8 @@ class _BlocDisposerState<T extends Bloc<dynamic, dynamic>>
   }
 
   @override
-  void dispose() {
-    bloc.close();
+  Future<void> dispose() async {
+    await bloc.close();
     super.dispose();
   }
 

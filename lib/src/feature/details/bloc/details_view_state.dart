@@ -17,8 +17,7 @@ class DetailsViewState with _$DetailsViewState {
 
   String get breedName => breed.name ?? "";
   String get wikiUrl => breed.wikipediaUrl ?? "";
-  String get affection => breed.affectionLevel != null
-      ? "affection: ${breed.affectionLevel!.toString()}"
-      : "";
+  String get affection =>
+      breed.affectionLevel != null ? "affection: ${breed.affectionLevel!}" : "";
   String get description => breed.description ?? "";
 }

@@ -3,6 +3,7 @@ import "package:cattestapp/src/feature/home/model/breed_model.dart";
 import "package:cattestapp/src/feature/home/model/image_model.dart";
 import "package:cattestapp/src/shared/base_event.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:fpdart/fpdart.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 
 part "details_view_bloc.freezed.dart";
@@ -15,7 +16,11 @@ class DetailsViewBloc extends Bloc<DetailsViewEvent, DetailsViewState> {
     required this.detailsController,
   }) : super(DetailsViewState(imageModel: model)) {
     on<DetailsViewEvent>(
-      (final event, final emit) => switch (event) {
+      (
+        final DetailsViewEvent event,
+        final Emitter<DetailsViewState> emit,
+      ) async =>
+          switch (event) {
         DetailsViewInit() => _onInit(event, emit),
       },
     );
@@ -23,7 +28,7 @@ class DetailsViewBloc extends Bloc<DetailsViewEvent, DetailsViewState> {
   final ImageModel model;
   final DetailsController detailsController;
 
-  void _onInit(
+  Future<void> _onInit(
     final DetailsViewInit event,
     final Emitter<DetailsViewState> emit,
   ) async {
@@ -32,15 +37,16 @@ class DetailsViewBloc extends Bloc<DetailsViewEvent, DetailsViewState> {
 
   Future<void> _fetchData(final Emitter<DetailsViewState> emit) async {
     emit(state.copyWith(isLoading: true));
-    final result = await detailsController.getImageDetails(model.id);
+    final Either<Exception, ImageModel> result =
+        await detailsController.getImageDetails(model.id);
     result.fold(
-      (final exception) => emit(
+      (final Exception exception) => emit(
         state.copyWith(
           exception: exception,
           isLoading: false,
         ),
       ),
-      (final imageDetails) => emit(
+      (final ImageModel imageDetails) => emit(
         state.copyWith(
           imageModel: imageDetails,
           isLoading: false,

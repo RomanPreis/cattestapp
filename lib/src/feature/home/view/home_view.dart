@@ -24,12 +24,12 @@ class _HomeViewState extends State<HomeView> {
         appBar: AppBar(
           title: const Text("Cat Pictures"),
           bottom: const TabBar(
-            tabs: [
+            tabs: <Widget>[
               Tab(text: "List"),
               Tab(text: "Dashboard"),
             ],
           ),
-          actions: [
+          actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.settings),
               onPressed: onSettingsPressed,
@@ -37,7 +37,7 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
         body: TabBarView(
-          children: [
+          children: <Widget>[
             ItemListTab(widget.bloc),
             DashboardTab(widget.bloc),
           ],

@@ -4,11 +4,6 @@ part "request_params.g.dart";
 
 @JsonSerializable()
 class RequestParams {
-  RequestParams.defaultParams(final int limit, final int? page)
-      : this(
-          order: "DESC",
-          hasBreeds: 1,
-        );
   const RequestParams({
     this.limit = 20,
     this.page = 0,
@@ -18,6 +13,13 @@ class RequestParams {
     this.categoryIds,
     this.subId,
   });
+  RequestParams.defaultParams(final int limit, final int? page)
+      : this(
+          order: "DESC",
+          hasBreeds: 1,
+          limit: limit,
+          page: page,
+        );
 
   final int limit;
   final int? page;

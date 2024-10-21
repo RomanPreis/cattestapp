@@ -11,9 +11,9 @@ import "settings/settings_view.dart";
 
 class MyApp extends StatelessWidget {
   const MyApp({
-    super.key,
     required this.settingsController,
     required this.dio,
+    super.key,
   });
 
   final SettingsController settingsController;
@@ -26,16 +26,17 @@ class MyApp extends StatelessWidget {
       builder: (final BuildContext context, final Widget? child) {
         return MaterialApp(
           restorationScopeId: "app",
-          localizationsDelegates: const [
+          localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: const [
+          supportedLocales: const <Locale>[
             Locale("en", ""), // English, no country code
           ],
-          onGenerateTitle: (final context) => context.l10n.appTitle,
+          onGenerateTitle: (final BuildContext context) =>
+              context.l10n.appTitle,
           theme: ThemeData(),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
@@ -45,7 +46,8 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  ///Routing function for the app. For more complex use cases  auto_route or go_router may be used.
+  ///Routing function for the app.
+  ///For more complex use cases  auto_route or go_router may be used.
   Route<dynamic>? _onGenerateRoute(final RouteSettings routeSettings) {
     return MaterialPageRoute<void>(
       settings: routeSettings,
@@ -55,7 +57,7 @@ class MyApp extends StatelessWidget {
             return SettingsView(controller: settingsController);
           case DetailsViewWrapper.routeName:
             return DetailsViewWrapper(
-              args: routeSettings.arguments as DetailsViewArguments,
+              args: routeSettings.arguments! as DetailsViewArguments,
               dio: dio,
             );
           case HomeViewWrapper.routeName:

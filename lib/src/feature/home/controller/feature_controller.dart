@@ -16,18 +16,20 @@ final class FeatureController extends AppController {
     required final RequestParams params,
   }) async {
     try {
-      final response = await dio.get<List<dynamic>>(
+      final Response<List<dynamic>> response = await dio.get<List<dynamic>>(
         AppUrls.search,
         queryParameters: params.toJson(),
       );
-      final data = response.data;
-      final result = data!
-          .map((final e) => ImageModel.fromJson(e as Map<String, dynamic>))
+      final List<dynamic>? data = response.data;
+      final List<ImageModel> result = data!
+          .map(
+            (final dynamic e) => ImageModel.fromJson(e as Map<String, dynamic>),
+          )
           .toList();
-      return Right(result);
-    } catch (e, st) {
+      return Right<Exception, List<ImageModel>>(result);
+    } on Exception catch (e, st) {
       log(e.toString(), error: e, stackTrace: st);
-      return Left(Exception(e.toString()));
+      return Left<Exception, List<ImageModel>>(Exception(e.toString()));
     }
   }
 }

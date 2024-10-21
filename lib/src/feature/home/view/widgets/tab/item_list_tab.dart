@@ -16,7 +16,7 @@ class ItemListTab extends StatefulWidget {
 }
 
 class _ItemListTabState extends State<ItemListTab> {
-  final _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _ItemListTabState extends State<ItemListTab> {
   Widget build(final BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       bloc: widget.bloc,
-      builder: (final context, final state) {
+      builder: (final BuildContext context, final HomeState state) {
         return state.exception != null
             ? Center(child: Text(state.exception.toString()))
             : ListView.builder(
@@ -45,7 +45,7 @@ class _ItemListTabState extends State<ItemListTab> {
                   if (index == state.imageModels.length) {
                     return const Center(child: CircularProgressIndicator());
                   } else {
-                    final item = state.imageModels[index];
+                    final ImageModel item = state.imageModels[index];
                     return ListTile(
                       key: ValueKey<ImageModel>(item),
                       title: Text("id: ${item.id}"),
@@ -53,7 +53,7 @@ class _ItemListTabState extends State<ItemListTab> {
                         backgroundImage: NetworkImage(item.url),
                         onBackgroundImageError: _onBackgroundImageError,
                       ),
-                      onTap: () => _onListItemTapped(item),
+                      onTap: () async => _onListItemTapped(item),
                     );
                   }
                 },
@@ -62,8 +62,8 @@ class _ItemListTabState extends State<ItemListTab> {
     );
   }
 
-  void _onListItemTapped(final ImageModel model) {
-    Navigator.pushNamed(
+  Future<void> _onListItemTapped(final ImageModel model) async {
+    await Navigator.pushNamed(
       context,
       DetailsViewWrapper.routeName,
       arguments: DetailsViewArguments(model),

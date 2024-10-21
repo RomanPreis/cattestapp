@@ -4,9 +4,6 @@ part "breed_model.g.dart";
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 final class BreedModel {
-  factory BreedModel.fromJson(final Map<String, dynamic> json) =>
-      _$BreedModelFromJson(json);
-
   const BreedModel(
     this.weight,
     this.id,
@@ -25,6 +22,8 @@ final class BreedModel {
     this.referenceImageId,
     this.affectionLevel,
   );
+  factory BreedModel.fromJson(final Map<String, dynamic> json) =>
+      _$BreedModelFromJson(json);
   final Map<String, String>? weight;
   final String? id;
   final String? name;

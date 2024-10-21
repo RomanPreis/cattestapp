@@ -1,4 +1,5 @@
 import "package:cattestapp/src/feature/details/bloc/details_view_bloc.dart";
+import "package:cattestapp/src/feature/home/model/image_model.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 
@@ -16,16 +17,16 @@ class DetailsView extends StatelessWidget {
       ),
       body: BlocBuilder<DetailsViewBloc, DetailsViewState>(
         bloc: bloc,
-        builder: (final context, final state) {
-          final model = state.imageModel;
+        builder: (final BuildContext context, final DetailsViewState state) {
+          final ImageModel model = state.imageModel;
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
-                children: [
+                children: <Widget>[
                   Text("id: ${model.id}"),
                   Image.network(model.url),
-                  if (state.hasBreedInfo) ...[
+                  if (state.hasBreedInfo) ...<Widget>[
                     Text(state.breedName),
                     Text(state.wikiUrl),
                     Text(state.affection),

@@ -22,7 +22,7 @@ class DetailsViewWrapper extends StatefulWidget {
 
   final DetailsViewArguments args;
   final Dio dio;
-  static const routeName = "/details";
+  static const String routeName = "/details";
 
   @override
   State<DetailsViewWrapper> createState() => _DetailsViewWrapperState();
@@ -44,7 +44,7 @@ class _DetailsViewWrapperState extends State<DetailsViewWrapper> {
         model: widget.args.model,
         detailsController: detailsController,
       )..add(const DetailsViewInit()),
-      builder: (final _, final bloc) => DetailsView(bloc),
+      builder: (final _, final DetailsViewBloc bloc) => DetailsView(bloc),
     );
   }
 }

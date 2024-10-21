@@ -3,11 +3,8 @@ import "package:json_annotation/json_annotation.dart";
 
 part "image_model.g.dart";
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 final class ImageModel {
-  factory ImageModel.fromJson(final Map<String, dynamic> json) =>
-      _$ImageModelFromJson(json);
-
   const ImageModel(
     this.id,
     this.url,
@@ -17,6 +14,8 @@ final class ImageModel {
     this.breeds,
     this.categories,
   );
+  factory ImageModel.fromJson(final Map<String, dynamic> json) =>
+      _$ImageModelFromJson(json);
   final String id;
   final String url;
   final int width;

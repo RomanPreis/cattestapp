@@ -7,10 +7,12 @@ import "src/settings/settings_controller.dart";
 import "src/settings/settings_service.dart";
 
 void main() async {
-  final settingsController = SettingsController(SettingsService());
-  final dio = Dio(
+  final SettingsController settingsController = SettingsController(
+    SettingsService(),
+  );
+  final Dio dio = Dio(
     BaseOptions(
-      headers: {
+      headers: <String, dynamic>{
         "x-api-key": Constants.apiKey,
       },
       receiveTimeout: const Duration(seconds: 15),

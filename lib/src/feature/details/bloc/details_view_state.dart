@@ -1,13 +1,11 @@
-// ignore_for_file: prefer_final_parameters
-
 part of "details_view_bloc.dart";
 
 @freezed
 class DetailsViewState with _$DetailsViewState {
   const factory DetailsViewState({
-    required ImageModel imageModel,
-    @Default(false) bool isLoading,
-    Exception? exception,
+    required final ImageModel imageModel,
+    @Default(false) final bool isLoading,
+    final Exception? exception,
   }) = _DetailsViewState;
 
   const DetailsViewState._();

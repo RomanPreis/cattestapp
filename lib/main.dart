@@ -1,3 +1,5 @@
+import "dart:isolate";
+
 import "package:cattestapp/src/shared/constants.dart";
 import "package:dio/dio.dart";
 import "package:flutter/material.dart";
